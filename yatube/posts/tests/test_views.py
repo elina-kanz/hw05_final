@@ -398,9 +398,11 @@ class PostPagesTests(TestCase):
         self.assertNotIn(new_post, posts_follow_list_after)
 
     def test_inability_follow_yourself(self):
-        followers_count_before = Follow.objects.filter(user=self.user_not_author).count()
+        followers_count_before = Follow.objects.filter(
+            user=self.user_not_author).count()
         self.authorized_client.get(
             reverse('posts:profile_follow', kwargs={'username': 'not_author'})
         )
-        followers_count_after = Follow.objects.filter(user=self.user_not_author).count()
+        followers_count_after = Follow.objects.filter(
+            user=self.user_not_author).count()
         self.assertEqual(followers_count_before, followers_count_after)
