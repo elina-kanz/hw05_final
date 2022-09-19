@@ -1,0 +1,36 @@
+{% extends '../base.html'%}
+{% load static %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+<style>
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Привет, я автор</h1>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <p>
+        Меня зовут Элина. Я закончила технический вуз в 2019.
+        С 2015 преподаю математику школьникам, работала в школе и сейчас люблю этот предмет.
+        Мне нравилось программировать, но не хватало уверенности и дисциплины, поэтому я решила
+        пройти курсы, чтобы получить там поддержку и четкое руководство в получении
+        практических навыков. Этот сайт - один из учебных проектов. </p>
+      <p>Ниже фото моего песеля Тарли, он дворянских кровей, любит охотиться на мышей и кушать.
+        Еще он очень старательно спит рядом, когда я учусь, помогает настраиваться.</p>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      <img src="{% static 'img/me.jpg' %}" class="img-responsive">
+      <img src="{% static 'img/tarli.jpg' %}" class="img-responsive">
+    </div>
+  </div>
+</div>
+{% endblock %}
