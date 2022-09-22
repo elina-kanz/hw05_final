@@ -119,25 +119,22 @@ class PostPagesTests(TestCase):
         ten_posts = Post.objects.select_related('author', 'group')[
             :NUMBER_OF_POSTS_ON_PAGE]
         last_post = page_obj[0]
-        last_text = last_post.text
-        last_author = last_post.author
-        last_image = last_post.image
         # lambda нужна, чтобы убрать кавычки из элементов ten_posts
         self.assertQuerysetEqual(ten_posts, page_obj, transform=lambda x: x)
-        self.assertEqual(last_text, self.post.text)
-        self.assertEqual(last_author, self.post.author)
-        self.assertEqual(last_image, self.post.image)
+        self.assertEqual(last_post.text, self.post.text)
+        self.assertEqual(last_post.author, self.post.author)
+        self.assertEqual(last_post.image, self.post.image)
 
     def test_first_page_index_contains_right_quantity_records(self):
-        """Проверка: количество постов на первой странице равно"""
-        """NUMBER_OF_POSTS_ON_PAGE."""
+        """Проверка: количество постов на первой странице равно
+        NUMBER_OF_POSTS_ON_PAGE."""
         response = self.guest_client.get(reverse('posts:index'))
         self.assertEqual(
             len(response.context['page_obj']), NUMBER_OF_POSTS_ON_PAGE)
 
     def test_second_page_index_contains_right_quantity_records(self):
-        # Проверка: на второй странице должно быть
-        # NUMBER_OF_POSTS_IN_DATABASE - NUMBER_OF_POSTS_ON_PAGE постов.
+        """Проверка: на второй странице должно быть
+        NUMBER_OF_POSTS_IN_DATABASE - NUMBER_OF_POSTS_ON_PAGE постов."""
         response = self.guest_client.get(reverse('posts:index') + '?page=2')
         self.assertEqual(len(
             response.context['page_obj']),
@@ -161,8 +158,8 @@ class PostPagesTests(TestCase):
             last_image_on_page, last_image_in_base)
 
     def test_first_page_group_list_contains_right_quantity_records(self):
-        """Проверка: количество постов на первой странице равно"""
-        """NUMBER_OF_POSTS_ON_PAGE."""
+        """Проверка: количество постов на первой странице равно
+        NUMBER_OF_POSTS_ON_PAGE."""
         response = self.guest_client.get(
             reverse('posts:group_list', kwargs={'slug': self.group.slug}))
         self.assertEqual(
@@ -242,8 +239,8 @@ class PostPagesTests(TestCase):
                 self.assertIsInstance(form_field, expected)
 
     def test_new_post_appeаrring_on_right_pages(self):
-        """Новый пост появится на главной странице, странице группы поста,"""
-        """странице автора и не появится на странице не группы поста."""
+        """Новый пост появится на главной странице, странице группы поста,
+        странице автора и не появится на странице не группы поста."""
         form_data = {
             'text': 'Тестовый новый пост',
             'group': self.group.pk
@@ -398,6 +395,7 @@ class PostPagesTests(TestCase):
         self.assertNotIn(new_post, posts_follow_list_after)
 
     def test_inability_follow_yourself(self):
+        """"Тест на невозможность подписаться на самого себя"""
         followers_count_before = Follow.objects.filter(
             user=self.user_not_author).count()
         self.authorized_client.get(
