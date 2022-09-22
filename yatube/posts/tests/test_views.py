@@ -166,6 +166,9 @@ class PostPagesTests(TestCase):
             len(response.context['page_obj']), NUMBER_OF_POSTS_ON_PAGE)
 
     def test_second_page_group_list_contains_right_quantity_records(self):
+        """Проверка: количество постов на первой странице равно
+        NUMBER_OF_POSTS_IN_DATABASE - NUMBER_OF_POSTS_ON_PAGE - 1(один пост
+        неуказанной группой)."""
         response = self.guest_client.get(
             reverse('posts:group_list', kwargs={
                 'slug': self.group.slug}) + '?page=2')
@@ -192,7 +195,8 @@ class PostPagesTests(TestCase):
             list(last_image_on_page.chunks()), list(self.uploaded.chunks()))
 
     def test_first_page_profile_contains_right_quantity_records(self):
-        """Первая страница сформирована корректно"""
+        """Проверка: количество постов на первой странице равно
+        NUMBER_OF_POSTS_ON_PAGE."""
         response = self.guest_client.get(
             reverse('posts:profile', kwargs={
                 'username': self.user_author.username}))
