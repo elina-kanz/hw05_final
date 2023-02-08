@@ -26,6 +26,8 @@ SECRET_KEY = '2(piwzz4&!nr#d&7-e&!q=vxti6j!2e^_y%z2p435kux5nqwft'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'www.studyblog.pythonanywhere.com',
+    'studyblog.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
     '[::1]',
