@@ -26,9 +26,6 @@ Faker==12.0.1
 
 ```
 git clone git@github.com:elina-kanz/hw05_final.git
-```
-
-```
 cd hw05_final
 ```
 
@@ -36,19 +33,11 @@ Cоздать и активировать виртуальное окружен�
 
 ```
 python3 -m venv env
-```
-
-```
 source env/bin/activate
 ```
-
+Установить зависимости из файла requirements.txt:
 ```
 python3 -m pip install --upgrade pip
-```
-
-Установить зависимости из файла requirements.txt:
-
-```
 pip install -r requirements.txt
 ```
 
